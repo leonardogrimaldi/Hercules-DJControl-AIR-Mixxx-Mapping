@@ -1,9 +1,9 @@
 <MixxxMIDIPreset mixxxVersion="1.10.0+" schemaVersion="1">
     <info>
-      <name>Hercules DJ Control AIR New</name>
-      <author>rojaro</author>
-      <description>Mapping for Hercules DJ Control AIR</description>
-      <forums>http://www.mixxx.org/forums/viewtopic.php?f=7&amp;t=3263</forums>
+        <name>Hercules DJ Control AIR New</name>
+        <author>rojaro</author>
+        <description>Mapping for Hercules DJ Control AIR</description>
+        <forums>http://www.mixxx.org/forums/viewtopic.php?f=7&amp;t=3263</forums>
         <manual>hercules_djcontrol_air</manual>
     </info>
     <controller id="DJ Control Air">
@@ -225,8 +225,7 @@
                 <status>0x90</status>
                 <midino>0x9</midino>
                 <group>[Channel1]</group>
-                <key>loop_in</key>
-                <description>Begin Loop Deck A</description>
+                <key>beatloop_activate</key>
                 <options>
                     <normal/>
                 </options>
@@ -245,8 +244,7 @@
                 <status>0x90</status>
                 <midino>0xa</midino>
                 <group>[Channel1]</group>
-                <key>loop_out</key>
-                <description>End Loop Deck A</description>
+                <key>loop_double</key>
                 <options>
                     <normal/>
                 </options>
@@ -265,8 +263,7 @@
                 <status>0x90</status>
                 <midino>0xb</midino>
                 <group>[Channel1]</group>
-                <key>loop_double</key>
-                <description>Loop Double Deck A</description>
+                <key>reloop_toggle</key>
                 <options>
                     <normal/>
                 </options>
@@ -285,8 +282,7 @@
                 <status>0x90</status>
                 <midino>0xc</midino>
                 <group>[Channel1]</group>
-                <key>reloop_exit</key>
-                <description>ReLoop Exit Deck A</description>
+                <key>loop_halve</key>
                 <options>
                     <normal/>
                 </options>
@@ -346,7 +342,7 @@
                 <midino>0x10</midino>
                 <group>[Channel1]</group>
                 <key>fwd</key>
-                <description>>> Deck A</description>
+                <description>Deck A</description>
                 <options>
                     <button/>
                 </options>
@@ -495,8 +491,7 @@
                 <status>0x90</status>
                 <midino>0x1f</midino>
                 <group>[Channel2]</group>
-                <key>loop_in</key>
-                <description>Begin Loop Deck B</description>
+                <key>beatloop_activate</key>
                 <options>
                     <normal/>
                 </options>
@@ -505,8 +500,7 @@
                 <status>0x90</status>
                 <midino>0x20</midino>
                 <group>[Channel2]</group>
-                <key>loop_out</key>
-                <description>End Loop Deck B</description>
+                <key>loop_double</key>
                 <options>
                     <normal/>
                 </options>
@@ -515,8 +509,7 @@
                 <status>0x90</status>
                 <midino>0x21</midino>
                 <group>[Channel2]</group>
-                <key>loop_double</key>
-                <description>Loop Double Deck B</description>
+                <key>reloop_toggle</key>
                 <options>
                     <normal/>
                 </options>
@@ -525,8 +518,7 @@
                 <status>0x90</status>
                 <midino>0x22</midino>
                 <group>[Channel2]</group>
-                <key>reloop_exit</key>
-                <description>ReLoop Exit Deck B</description>
+                <key>loop_halve</key>
                 <options>
                     <normal/>
                 </options>
@@ -839,7 +831,36 @@
             <output>
                 <group>[Channel1]</group>
                 <key>loop_enabled</key>
-                <description>ReLoop Exit Deck A LED</description>
+                <minimum>0.1</minimum>
+                <maximum>1</maximum>
+                <status>0x90</status>
+                <midino>0x9</midino>
+                <on>0x7f</on>
+                <off>0x0</off>
+            </output>
+            <output>
+                <group>[Channel1]</group>
+                <key>loop_double</key>
+                <minimum>0.1</minimum>
+                <maximum>1</maximum>
+                <status>0x90</status>
+                <midino>0xa</midino>
+                <on>0x7f</on>
+                <off>0x0</off>
+            </output>
+            <output>
+                <group>[Channel1]</group>
+                <key>reloop_toggle</key>
+                <minimum>0.1</minimum>
+                <maximum>1</maximum>
+                <status>0x90</status>
+                <midino>0xb</midino>
+                <on>0x7f</on>
+                <off>0x0</off>
+            </output>
+            <output>
+                <group>[Channel1]</group>
+                <key>loop_halve</key>
                 <minimum>0.1</minimum>
                 <maximum>1</maximum>
                 <status>0x90</status>
@@ -895,7 +916,36 @@
             <output>
                 <group>[Channel2]</group>
                 <key>loop_enabled</key>
-                <description>ReLoop Exit Deck B LED</description>
+                <minimum>0.1</minimum>
+                <maximum>1</maximum>
+                <status>0x90</status>
+                <midino>0x1f</midino>
+                <on>0x7f</on>
+                <off>0x0</off>
+            </output>
+            <output>
+                <group>[Channel2]</group>
+                <key>loop_double</key>
+                <minimum>0.1</minimum>
+                <maximum>1</maximum>
+                <status>0x90</status>
+                <midino>0x20</midino>
+                <on>0x7f</on>
+                <off>0x0</off>
+            </output>
+            <output>
+                <group>[Channel2]</group>
+                <key>reloop_toggle</key>
+                <minimum>0.1</minimum>
+                <maximum>1</maximum>
+                <status>0x90</status>
+                <midino>0x21</midino>
+                <on>0x7f</on>
+                <off>0x0</off>
+            </output>
+            <output>
+                <group>[Channel2]</group>
+                <key>loop_halve</key>
                 <minimum>0.1</minimum>
                 <maximum>1</maximum>
                 <status>0x90</status>
