@@ -679,7 +679,7 @@
         <outputs>
             <output>
                 <group>[Channel1]</group>
-                <key>hotcue_1_enabled</key>
+                <key>hotcue_1_status</key>
                 <description>Hotcue 1 LED Deck A</description>
                 <minimum>0.1</minimum>
                 <maximum>1</maximum>
@@ -690,7 +690,7 @@
             </output>
             <output>
                 <group>[Channel1]</group>
-                <key>hotcue_2_enabled</key>
+                <key>hotcue_2_status</key>
                 <description>Hotcue 2 LED Deck A</description>
                 <minimum>0.1</minimum>
                 <maximum>1</maximum>
@@ -701,7 +701,7 @@
             </output>
             <output>
                 <group>[Channel1]</group>
-                <key>hotcue_3_enabled</key>
+                <key>hotcue_3_status</key>
                 <description>Hotcue 3 LED Deck A</description>
                 <minimum>0.1</minimum>
                 <maximum>1</maximum>
@@ -712,7 +712,7 @@
             </output>
             <output>
                 <group>[Channel1]</group>
-                <key>hotcue_4_enabled</key>
+                <key>hotcue_4_status</key>
                 <description>Hotcue 4 LED Deck A</description>
                 <minimum>0.1</minimum>
                 <maximum>1</maximum>
@@ -723,7 +723,7 @@
             </output>
             <output>
                 <group>[Channel2]</group>
-                <key>hotcue_1_enabled</key>
+                <key>hotcue_1_status</key>
                 <description>Hotcue 1 LED Deck B</description>
                 <minimum>0.1</minimum>
                 <maximum>1</maximum>
@@ -734,7 +734,7 @@
             </output>
             <output>
                 <group>[Channel2]</group>
-                <key>hotcue_2_enabled</key>
+                <key>hotcue_2_status</key>
                 <description>Hotcue 2 LED Deck B</description>
                 <minimum>0.1</minimum>
                 <maximum>1</maximum>
@@ -745,7 +745,7 @@
             </output>
             <output>
                 <group>[Channel2]</group>
-                <key>hotcue_3_enabled</key>
+                <key>hotcue_3_status</key>
                 <description>Hotcue 3 LED Deck B</description>
                 <minimum>0.1</minimum>
                 <maximum>1</maximum>
@@ -756,7 +756,7 @@
             </output>
             <output>
                 <group>[Channel2]</group>
-                <key>hotcue_4_enabled</key>
+                <key>hotcue_4_status</key>
                 <description>Hotcue 4 LED Deck B</description>
                 <minimum>0.1</minimum>
                 <maximum>1</maximum>
