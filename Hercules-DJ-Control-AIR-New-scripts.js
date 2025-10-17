@@ -54,6 +54,11 @@ HerculesAir.init = function(id) {
     print ("Hercules DJ Control AIR: "+id+" initialized.");
 }
 
+HerculesAir.resetLEDs = function() {
+    midi.sendShortMsg(0x90, 0x7f, 0x00);
+    console.log("Hercules DJ Control AIR: LEDs reset.");
+}
+
 HerculesAir.shutdown = function() {
     HerculesAir.resetLEDs()
 }
