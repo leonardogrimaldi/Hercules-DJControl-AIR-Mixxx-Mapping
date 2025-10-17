@@ -144,11 +144,37 @@
             <control>
                 <status>0x90</status>
                 <midino>0x5</midino>
-                <group>[Sampler1]</group>
-                <key>HerculesAir.sampler</key>
-                <description>Sampler1 Start/Stop Deck B</description>
+                <group>[Channel1]</group>
+                <key>hotcue_1_activate</key>
                 <options>
-                    <script-binding/>
+                    <normal/>
+                </options>
+            </control>
+            <control>
+                <status>0x90</status>
+                <midino>0x6</midino>
+                <group>[Channel1]</group>
+                <key>hotcue_2_activate</key>
+                <options>
+                    <normal/>
+                </options>
+            </control>
+             <control>
+                <status>0x90</status>
+                <midino>0x7</midino>
+                <group>[Channel1]</group>
+                <key>hotcue_3_activate</key>
+                <options>
+                    <normal/>
+                </options>
+            </control>
+            <control>
+                <status>0x90</status>
+                <midino>0x8</midino>
+                <group>[Channel1]</group>
+                <key>hotcue_4_activate</key>
+                <options>
+                    <normal/>
                 </options>
             </control>
             <control>
@@ -162,16 +188,6 @@
                 </options>
             </control>
             <control>
-                <status>0x90</status>
-                <midino>0x6</midino>
-                <group>[Sampler2]</group>
-                <key>HerculesAir.sampler</key>
-                <description>Sampler2 Start/Stop Deck B</description>
-                <options>
-                    <script-binding/>
-                </options>
-            </control>
-            <control>
                 <status>0xb0</status>
                 <midino>0x38</midino>
                 <group>[Channel1]</group>
@@ -182,16 +198,6 @@
                 </options>
             </control>
             <control>
-                <status>0x90</status>
-                <midino>0x7</midino>
-                <group>[Sampler3]</group>
-                <key>HerculesAir.sampler</key>
-                <description>Sampler3 Start/Stop Deck B</description>
-                <options>
-                    <script-binding/>
-                </options>
-            </control>
-            <control>
                 <status>0xb0</status>
                 <midino>0x39</midino>
                 <group>[Channel1]</group>
@@ -199,16 +205,6 @@
                 <description>Bass Deck A</description>
                 <options>
                     <normal/>
-                </options>
-            </control>
-            <control>
-                <status>0x90</status>
-                <midino>0x8</midino>
-                <group>[Sampler4]</group>
-                <key>HerculesAir.sampler</key>
-                <description>Sampler4 Start/Stop Deck B</description>
-                <options>
-                    <script-binding/>
                 </options>
             </control>
             <control>
@@ -450,41 +446,37 @@
             <control>
                 <status>0x90</status>
                 <midino>0x1b</midino>
-                <group>[Sampler1]</group>
-                <key>HerculesAir.sampler</key>
-                <description>Sampler1 Start/Stop Deck A</description>
+                <group>[Channel2]</group>
+                <key>hotcue_1_activate</key>
                 <options>
-                    <script-binding/>
+                    <normal/>
                 </options>
             </control>
             <control>
                 <status>0x90</status>
                 <midino>0x1c</midino>
-                <group>[Sampler2]</group>
-                <key>HerculesAir.sampler</key>
-                <description>Sampler2 Start/Stop Deck A</description>
+                <group>[Channel2]</group>
+                <key>hotcue_2_activate</key>
                 <options>
-                    <script-binding/>
+                    <normal/>
                 </options>
             </control>
             <control>
                 <status>0x90</status>
                 <midino>0x1d</midino>
-                <group>[Sampler3]</group>
-                <key>HerculesAir.sampler</key>
-                <description>Sampler3 Start/Stop Deck A</description>
+                <group>[Channel2]</group>
+                <key>hotcue_3_activate</key>
                 <options>
-                    <script-binding/>
+                    <normal/>
                 </options>
             </control>
             <control>
                 <status>0x90</status>
                 <midino>0x1e</midino>
-                <group>[Sampler4]</group>
-                <key>HerculesAir.sampler</key>
-                <description>Sampler4 Start/Stop Deck A</description>
+                <group>[Channel2]</group>
+                <key>hotcue_4_activate</key>
                 <options>
-                    <script-binding/>
+                    <normal/>
                 </options>
             </control>
             <control>
@@ -686,9 +678,31 @@
         </controls>
         <outputs>
             <output>
-                <group>[Sampler3]</group>
-                <key>play</key>
-                <description>Sampler 3 LED Deck A</description>
+                <group>[Channel1]</group>
+                <key>hotcue_1_enabled</key>
+                <description>Hotcue 1 LED Deck A</description>
+                <minimum>0.1</minimum>
+                <maximum>1</maximum>
+                <status>0x90</status>
+                <midino>0x5</midino>
+                <on>0x7f</on>
+                <off>0x0</off>
+            </output>
+            <output>
+                <group>[Channel1]</group>
+                <key>hotcue_2_enabled</key>
+                <description>Hotcue 2 LED Deck A</description>
+                <minimum>0.1</minimum>
+                <maximum>1</maximum>
+                <status>0x90</status>
+                <midino>0x6</midino>
+                <on>0x7f</on>
+                <off>0x0</off>
+            </output>
+            <output>
+                <group>[Channel1]</group>
+                <key>hotcue_3_enabled</key>
+                <description>Hotcue 3 LED Deck A</description>
                 <minimum>0.1</minimum>
                 <maximum>1</maximum>
                 <status>0x90</status>
@@ -697,13 +711,57 @@
                 <off>0x0</off>
             </output>
             <output>
-                <group>[Sampler3]</group>
-                <key>play</key>
-                <description>Sampler 3 LED Deck B</description>
+                <group>[Channel1]</group>
+                <key>hotcue_4_enabled</key>
+                <description>Hotcue 4 LED Deck A</description>
+                <minimum>0.1</minimum>
+                <maximum>1</maximum>
+                <status>0x90</status>
+                <midino>0x8</midino>
+                <on>0x7f</on>
+                <off>0x0</off>
+            </output>
+            <output>
+                <group>[Channel2]</group>
+                <key>hotcue_1_enabled</key>
+                <description>Hotcue 1 LED Deck B</description>
+                <minimum>0.1</minimum>
+                <maximum>1</maximum>
+                <status>0x90</status>
+                <midino>0x1b</midino>
+                <on>0x7f</on>
+                <off>0x0</off>
+            </output>
+            <output>
+                <group>[Channel2]</group>
+                <key>hotcue_2_enabled</key>
+                <description>Hotcue 2 LED Deck B</description>
+                <minimum>0.1</minimum>
+                <maximum>1</maximum>
+                <status>0x90</status>
+                <midino>0x1c</midino>
+                <on>0x7f</on>
+                <off>0x0</off>
+            </output>
+            <output>
+                <group>[Channel2]</group>
+                <key>hotcue_3_enabled</key>
+                <description>Hotcue 3 LED Deck B</description>
                 <minimum>0.1</minimum>
                 <maximum>1</maximum>
                 <status>0x90</status>
                 <midino>0x1d</midino>
+                <on>0x7f</on>
+                <off>0x0</off>
+            </output>
+            <output>
+                <group>[Channel2]</group>
+                <key>hotcue_4_enabled</key>
+                <description>Hotcue 4 LED Deck B</description>
+                <minimum>0.1</minimum>
+                <maximum>1</maximum>
+                <status>0x90</status>
+                <midino>0x1e</midino>
                 <on>0x7f</on>
                 <off>0x0</off>
             </output>
@@ -739,29 +797,7 @@
                 <midino>0x14</midino>
                 <on>0x7f</on>
                 <off>0x0</off>
-            </output>
-            <output>
-                <group>[Sampler2]</group>
-                <key>play</key>
-                <description>Sampler 2 LED Deck A</description>
-                <minimum>0.1</minimum>
-                <maximum>1</maximum>
-                <status>0x90</status>
-                <midino>0x6</midino>
-                <on>0x7f</on>
-                <off>0x0</off>
-            </output>
-            <output>
-                <group>[Sampler2]</group>
-                <key>play</key>
-                <description>Sampler 2 LED Deck B</description>
-                <minimum>0.1</minimum>
-                <maximum>1</maximum>
-                <status>0x90</status>
-                <midino>0x1c</midino>
-                <on>0x7f</on>
-                <off>0x0</off>
-            </output>
+            </output>     
             <output>
                 <group>[Channel2]</group>
                 <key>keylock</key>
@@ -781,28 +817,6 @@
                 <maximum>1</maximum>
                 <status>0x0</status>
                 <midino>0x1</midino>
-                <on>0x7f</on>
-                <off>0x0</off>
-            </output>
-            <output>
-                <group>[Sampler1]</group>
-                <key>play</key>
-                <description>Sampler 1 LED Deck A</description>
-                <minimum>0.1</minimum>
-                <maximum>1</maximum>
-                <status>0x90</status>
-                <midino>0x5</midino>
-                <on>0x7f</on>
-                <off>0x0</off>
-            </output>
-            <output>
-                <group>[Sampler1]</group>
-                <key>play</key>
-                <description>Sampler 1 LED Deck B</description>
-                <minimum>0.1</minimum>
-                <maximum>1</maximum>
-                <status>0x90</status>
-                <midino>0x1b</midino>
                 <on>0x7f</on>
                 <off>0x0</off>
             </output>
@@ -1016,28 +1030,6 @@
                 <maximum>1</maximum>
                 <status>0x90</status>
                 <midino>0x3</midino>
-                <on>0x7f</on>
-                <off>0x0</off>
-            </output>
-            <output>
-                <group>[Sampler4]</group>
-                <key>play</key>
-                <description>Sampler 4 LED Deck A</description>
-                <minimum>0.1</minimum>
-                <maximum>1</maximum>
-                <status>0x90</status>
-                <midino>0x8</midino>
-                <on>0x7f</on>
-                <off>0x0</off>
-            </output>
-            <output>
-                <group>[Sampler4]</group>
-                <key>play</key>
-                <description>Sampler 4 LED Deck B</description>
-                <minimum>0.1</minimum>
-                <maximum>1</maximum>
-                <status>0x90</status>
-                <midino>0x1e</midino>
                 <on>0x7f</on>
                 <off>0x0</off>
             </output>
