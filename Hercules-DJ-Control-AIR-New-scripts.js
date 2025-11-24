@@ -342,6 +342,65 @@ HerculesAir.forwardDeckB = function(midino, control, value, status, group) {
     }
 }
 
+// Loop button 1 for Deck B (0x1F) - beatloop_activate with shift support for loop_in
+HerculesAir.loopButton1DeckB = function(midino, control, value, status, group) {
+    if (value >= 0x01) { // Button pressed (sensitive range)
+        if (HerculesAir.shiftButtonPressed) {
+            // Shift + Loop Button 1: Set loop in point
+            engine.setValue(group, "loop_in", 1);
+        } else {
+            // Normal Loop Button 1: Activate beat loop
+            engine.setValue(group, "beatloop_activate", 1);
+        }
+    } else {
+        // Button released - reset only the control that was activated
+        if (HerculesAir.shiftButtonPressed) {
+            engine.setValue(group, "loop_in", 0);
+        } else {
+            engine.setValue(group, "beatloop_activate", 0);
+        }
+    }
+}
+
+// Loop button 2 for Deck B (0x20) - loop_double with shift support for loop_out
+HerculesAir.loopButton2DeckB = function(midino, control, value, status, group) {
+    if (value >= 0x01) { // Button pressed (sensitive range)
+        if (HerculesAir.shiftButtonPressed) {
+            // Shift + Loop Button 2: Set loop out point
+            engine.setValue(group, "loop_out", 1);
+        } else {
+            // Normal Loop Button 2: Double loop length
+            engine.setValue(group, "loop_double", 1);
+        }
+    } else {
+        // Button released - reset only the control that was activated
+        if (HerculesAir.shiftButtonPressed) {
+            engine.setValue(group, "loop_out", 0);
+        } else {
+            engine.setValue(group, "loop_double", 0);
+        }
+    }
+}
+
+// Loop button 4 for Deck B (0x22) - loop_halve with shift support for loop_anchor
+HerculesAir.loopButton4DeckB = function(midino, control, value, status, group) {
+    if (value >= 0x01) { // Button pressed (sensitive range)
+        if (HerculesAir.shiftButtonPressed) {
+            // Shift + Loop Button 4: Toggle loop anchor
+            const loop_anchor_val = engine.getValue(group, "loop_anchor");
+            engine.setValue(group, "loop_anchor", loop_anchor_val ? 0 : 1);
+        } else {
+            // Normal Loop Button 4: Halve loop length
+            engine.setValue(group, "loop_halve", 1);
+        }
+    } else {
+        // Button released - only reset loop_halve (loop_anchor is a toggle)
+        if (!HerculesAir.shiftButtonPressed) {
+            engine.setValue(group, "loop_halve", 0);
+        }
+    }
+}
+
 HerculesAir.spinback= function(midino, control, value, status,group) {
     if (value==0x7f) {
         HerculesAir.enableSpinBack = !HerculesAir.enableSpinBack;
