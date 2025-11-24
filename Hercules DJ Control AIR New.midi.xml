@@ -327,20 +327,20 @@
                 <status>0x90</status>
                 <midino>0xf</midino>
                 <group>[Channel1]</group>
-                <key>back</key>
-                <description>&lt;&lt; Deck A</description>
+                <key>HerculesAir.rewindDeckA</key>
+                <description>rewind Deck A with Shift Beat Jump</description>
                 <options>
-                    <button/>
+                    <script-binding/>
                 </options>
             </control>
             <control>
                 <status>0x90</status>
                 <midino>0x10</midino>
                 <group>[Channel1]</group>
-                <key>fwd</key>
-                <description>Deck A</description>
+                <key>HerculesAir.forwardDeckA</key>
+                <description>forward Deck A with Shift Beat Jump</description>
                 <options>
-                    <button/>
+                    <script-binding/>
                 </options>
             </control>
             <control>
@@ -539,20 +539,20 @@
                 <status>0x90</status>
                 <midino>0x25</midino>
                 <group>[Channel2]</group>
-                <key>back</key>
-                <description>&lt;&lt; Deck B</description>
+                <key>HerculesAir.rewindDeckB</key>
+                <description>rewind Deck B with Shift Beat Jump</description>
                 <options>
-                    <button/>
+                    <script-binding/>
                 </options>
             </control>
             <control>
                 <status>0x90</status>
                 <midino>0x26</midino>
                 <group>[Channel2]</group>
-                <key>fwd</key>
-                <description>>> Deck B</description>
+                <key>HerculesAir.forwardDeckB</key>
+                <description>forward Deck B with Shift Beat Jump</description>
                 <options>
-                    <button/>
+                    <script-binding/>
                 </options>
             </control>
             <control>

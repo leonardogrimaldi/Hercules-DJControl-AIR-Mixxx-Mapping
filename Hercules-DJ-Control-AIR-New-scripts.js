@@ -195,6 +195,93 @@ HerculesAir.shift = function(midino, control, value, status, group) {
     midi.sendShortMsg(status, control, value);
 }
 
+// Rewind button for Deck A (0x0F) - with shift support for beat jumping
+HerculesAir.rewindDeckA = function(midino, control, value, status, group) {
+    if (value == 0x7f) { // Button pressed
+        if (HerculesAir.shiftButtonPressed) {
+            // Shift + Rewind: Jump backwards by X beats
+            engine.setValue(group, "beatjump_backward", 1);
+        } else {
+            // Normal Rewind: Fast rewind
+            engine.setValue(group, "back", 1);
+        }
+    } else {
+        // Button released
+        if (HerculesAir.shiftButtonPressed) {
+            // Reset beat jump on release
+            engine.setValue(group, "beatjump_backward", 0);
+        } else {
+            // Stop rewind
+            engine.setValue(group, "back", 0);
+        }
+    }
+}
+
+// Forward button for Deck A (0x10) - with shift support for beat jumping
+HerculesAir.forwardDeckA = function(midino, control, value, status, group) {
+    if (value == 0x7f) { // Button pressed
+        if (HerculesAir.shiftButtonPressed) {
+            // Shift + Forward: Jump forwards by X beats
+            engine.setValue(group, "beatjump_forward", 1);
+        } else {
+            // Normal Forward: Fast forward
+            engine.setValue(group, "fwd", 1);
+        }
+    } else {
+        // Button released
+        if (HerculesAir.shiftButtonPressed) {
+            // Reset beat jump on release
+            engine.setValue(group, "beatjump_forward", 0);
+        } else {
+            // Stop forward
+            engine.setValue(group, "fwd", 0);
+        }
+    }
+}
+
+// Rewind button for Deck B (0x25) - with shift support for beat jumping
+HerculesAir.rewindDeckB = function(midino, control, value, status, group) {
+    if (value == 0x7f) { // Button pressed
+        if (HerculesAir.shiftButtonPressed) {
+            // Shift + Rewind: Jump backwards by X beats
+            engine.setValue(group, "beatjump_backward", 1);
+        } else {
+            // Normal Rewind: Fast rewind
+            engine.setValue(group, "back", 1);
+        }
+    } else {
+        // Button released
+        if (HerculesAir.shiftButtonPressed) {
+            // Reset beat jump on release
+            engine.setValue(group, "beatjump_backward", 0);
+        } else {
+            // Stop rewind
+            engine.setValue(group, "back", 0);
+        }
+    }
+}
+
+// Forward button for Deck B (0x26) - with shift support for beat jumping
+HerculesAir.forwardDeckB = function(midino, control, value, status, group) {
+    if (value == 0x7f) { // Button pressed
+        if (HerculesAir.shiftButtonPressed) {
+            // Shift + Forward: Jump forwards by X beats
+            engine.setValue(group, "beatjump_forward", 1);
+        } else {
+            // Normal Forward: Fast forward
+            engine.setValue(group, "fwd", 1);
+        }
+    } else {
+        // Button released
+        if (HerculesAir.shiftButtonPressed) {
+            // Reset beat jump on release
+            engine.setValue(group, "beatjump_forward", 0);
+        } else {
+            // Stop forward
+            engine.setValue(group, "fwd", 0);
+        }
+    }
+}
 
 HerculesAir.spinback= function(midino, control, value, status,group) {
     if (value==0x7f) {
