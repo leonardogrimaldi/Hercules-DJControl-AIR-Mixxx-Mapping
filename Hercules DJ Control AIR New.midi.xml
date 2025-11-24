@@ -221,9 +221,10 @@
                 <status>0x90</status>
                 <midino>0x9</midino>
                 <group>[Channel1]</group>
-                <key>beatloop_activate</key>
+                <key>HerculesAir.loopButton1DeckA</key>
+                <description>Beat Loop / Loop In (Shift) Deck A</description>
                 <options>
-                    <normal/>
+                    <script-binding/>
                 </options>
             </control>
             <control>
@@ -240,9 +241,10 @@
                 <status>0x90</status>
                 <midino>0xa</midino>
                 <group>[Channel1]</group>
-                <key>loop_double</key>
+                <key>HerculesAir.loopButton2DeckA</key>
+                <description>Loop Double / Loop Out (Shift) Deck A</description>
                 <options>
-                    <normal/>
+                    <script-binding/>
                 </options>
             </control>
             <control>
@@ -278,9 +280,10 @@
                 <status>0x90</status>
                 <midino>0xc</midino>
                 <group>[Channel1]</group>
-                <key>loop_halve</key>
+                <key>HerculesAir.loopButton4DeckA</key>
+                <description>Loop Halve / Loop Anchor (Shift) Deck A</description>
                 <options>
-                    <normal/>
+                    <script-binding/>
                 </options>
             </control>
             <control>
