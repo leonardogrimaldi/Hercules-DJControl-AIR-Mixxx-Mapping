@@ -449,6 +449,48 @@ HerculesAir.loopButton4DeckB = function(midino, control, value, status, group) {
     }
 }
 
+// Effect knob control for Deck B button 1 (0x17) - turn left
+HerculesAir.effectKnobLeftDeckB = function(midino, control, value, status, group) {
+    if (value >= 0x01) { // Button pressed
+        HerculesAir.effectButton1Pressed = true;
+        
+        // Check if both buttons are pressed for reset
+        if (HerculesAir.effectButton1Pressed && HerculesAir.effectButton2Pressed) {
+            // Reset quick effect knob
+            script.triggerControl("[QuickEffectRack1_[Channel2]]", "super1_set_default");
+        } else {
+            // Turn effect knob left (decrease value)
+            var currentValue = engine.getValue("[QuickEffectRack1_[Channel2]]", "super1");
+            var newValue = Math.max(0, currentValue - HerculesAir.filter_step); // Decrease by 10%, min 0
+            engine.setValue("[QuickEffectRack1_[Channel2]]", "super1", newValue);
+        }
+    } else {
+        // Button released
+        HerculesAir.effectButton1Pressed = false;
+    }
+}
+
+// Effect knob control for Deck B button 2 (0x18) - turn right
+HerculesAir.effectKnobRightDeckB = function(midino, control, value, status, group) {
+    if (value >= 0x01) { // Button pressed
+        HerculesAir.effectButton2Pressed = true;
+        
+        // Check if both buttons are pressed for reset
+        if (HerculesAir.effectButton1Pressed && HerculesAir.effectButton2Pressed) {
+            // Reset effect knob to center (0.5)
+            script.triggerControl("[QuickEffectRack1_[Channel2]]", "super1_set_default");
+        } else {
+            // Turn effect knob right (increase value)
+            var currentValue = engine.getValue("[QuickEffectRack1_[Channel2]]", "super1");
+            var newValue = Math.min(1, currentValue + HerculesAir.filter_step); // Increase by 10%, max 1
+            engine.setValue("[QuickEffectRack1_[Channel2]]", "super1", newValue);
+        }
+    } else {
+        // Button released
+        HerculesAir.effectButton2Pressed = false;
+    }
+}
+
 HerculesAir.spinback= function(midino, control, value, status,group) {
     if (value==0x7f) {
         HerculesAir.enableSpinBack = !HerculesAir.enableSpinBack;
