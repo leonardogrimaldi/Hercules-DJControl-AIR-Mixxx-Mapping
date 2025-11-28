@@ -195,6 +195,52 @@ HerculesAir.shift = function(midino, control, value, status, group) {
     midi.sendShortMsg(status, control, value);
 }
 
+// Track button states for effect knob reset functionality
+HerculesAir.effectButton1Pressed = false;
+HerculesAir.effectButton2Pressed = false;
+
+// Effect knob control for Deck A button 1 (0x01) - turn left
+HerculesAir.effectKnobLeftDeckA = function(midino, control, value, status, group) {
+    if (value >= 0x01) { // Button pressed
+        HerculesAir.effectButton1Pressed = true;
+        
+        // Check if both buttons are pressed for reset
+        if (HerculesAir.effectButton1Pressed && HerculesAir.effectButton2Pressed) {
+            // Reset effect knob to center (0.5)
+            engine.setValue("[QuickEffectRack1_[Channel1]]", "super1", 0.5);
+        } else {
+            // Turn effect knob left (decrease value)
+            var currentValue = engine.getValue("[QuickEffectRack1_[Channel1]]", "super1");
+            var newValue = Math.max(0, currentValue - 0.05); // Decrease by 5%, min 0
+            engine.setValue("[QuickEffectRack1_[Channel1]]", "super1", newValue);
+        }
+    } else {
+        // Button released
+        HerculesAir.effectButton1Pressed = false;
+    }
+}
+
+// Effect knob control for Deck A button 2 (0x02) - turn right
+HerculesAir.effectKnobRightDeckA = function(midino, control, value, status, group) {
+    if (value >= 0x01) { // Button pressed
+        HerculesAir.effectButton2Pressed = true;
+        
+        // Check if both buttons are pressed for reset
+        if (HerculesAir.effectButton1Pressed && HerculesAir.effectButton2Pressed) {
+            // Reset effect knob to center (0.5)
+            engine.setValue("[QuickEffectRack1_[Channel1]]", "super1", 0.5);
+        } else {
+            // Turn effect knob right (increase value)
+            var currentValue = engine.getValue("[QuickEffectRack1_[Channel1]]", "super1");
+            var newValue = Math.min(1, currentValue + 0.05); // Increase by 5%, max 1
+            engine.setValue("[QuickEffectRack1_[Channel1]]", "super1", newValue);
+        }
+    } else {
+        // Button released
+        HerculesAir.effectButton2Pressed = false;
+    }
+}
+
 // Rewind button for Deck A (0x0F) - with shift support for beat jumping
 HerculesAir.rewindDeckA = function(midino, control, value, status, group) {
     if (value == 0x7f) { // Button pressed

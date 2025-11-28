@@ -65,10 +65,10 @@
                 <status>0x90</status>
                 <midino>0x1</midino>
                 <group>[Channel1]</group>
-                <key>flanger</key>
-                <description>Flanger Deck A</description>
+                <key>HerculesAir.effectKnobLeftDeckA</key>
+                <description>Effect Knob Left / Reset (Both) Deck A</description>
                 <options>
-                    <normal/>
+                    <script-binding/>
                 </options>
             </control>
             <control>
@@ -85,10 +85,10 @@
                 <status>0x90</status>
                 <midino>0x2</midino>
                 <group>[Channel1]</group>
-                <key>beats_translate_curpos</key>
-                <description>Move Beatgrid to align with current playposition Deck A</description>
+                <key>HerculesAir.effectKnobRightDeckA</key>
+                <description>Effect Knob Right / Reset (Both) Deck A</description>
                 <options>
-                    <normal/>
+                    <script-binding/>
                 </options>
             </control>
             <control>
