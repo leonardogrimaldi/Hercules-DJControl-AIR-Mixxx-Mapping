@@ -2,6 +2,7 @@
     <info>
         <name>Hercules DJ Control AIR New</name>
         <author>rojaro</author>
+        <author>leonardogrimaldi</author>
         <description>Mapping for Hercules DJ Control AIR</description>
         <forums>https://mixxx.discourse.group/t/hercules-djcontrol-air-in-2-5/32838</forums>
         <manual>hercules_djcontrol_air</manual>
@@ -62,6 +63,16 @@
                 </options>
             </control>
             <control>
+                <status>0x90</status>
+                <midino>0x1</midino>
+                <group>[Channel1]</group>
+                <key>HerculesAir.effectKnobLeftDeckA</key>
+                <description>Effect Knob Left / Reset (Both) Deck A</description>
+                <options>
+                    <script-binding/>
+                </options>
+            </control>
+            <control>
                 <status>0xb0</status>
                 <midino>0x33</midino>
                 <group>[Channel2]</group>
@@ -75,10 +86,10 @@
                 <status>0x90</status>
                 <midino>0x2</midino>
                 <group>[Channel1]</group>
-                <key>beats_translate_curpos</key>
-                <description>Move Beatgrid to align with current playposition Deck A</description>
+                <key>HerculesAir.effectKnobRightDeckA</key>
+                <description>Effect Knob Right / Reset (Both) Deck A</description>
                 <options>
-                    <normal/>
+                    <script-binding/>
                 </options>
             </control>
             <control>
@@ -95,8 +106,8 @@
                 <status>0x90</status>
                 <midino>0x3</midino>
                 <group>[Channel1]</group>
-                <key>quantize</key>
-                <description>Quantize Loops/Hot-Cues Deck A</description>
+                <key>keylock</key>
+                <description>Keylock Deck A</description>
                 <options>
                     <normal/>
                 </options>
@@ -113,10 +124,10 @@
             </control>
             <control>
                 <status>0x90</status>
-                <midino>0x4</midino>
+                <midino>0x04</midino>
                 <group>[Channel1]</group>
-                <key>keylock</key>
-                <description>Keylock Deck A</description>
+                <key>beats_translate_curpos</key>
+                <description>beats_translate_curpos</description>
                 <options>
                     <normal/>
                 </options>
@@ -211,9 +222,10 @@
                 <status>0x90</status>
                 <midino>0x9</midino>
                 <group>[Channel1]</group>
-                <key>beatloop_activate</key>
+                <key>HerculesAir.loopButton1DeckA</key>
+                <description>Beat Loop / Loop In (Shift) Deck A</description>
                 <options>
-                    <normal/>
+                    <script-binding/>
                 </options>
             </control>
             <control>
@@ -230,9 +242,10 @@
                 <status>0x90</status>
                 <midino>0xa</midino>
                 <group>[Channel1]</group>
-                <key>loop_double</key>
+                <key>HerculesAir.loopButton2DeckA</key>
+                <description>Loop Double / Loop Out (Shift) Deck A</description>
                 <options>
-                    <normal/>
+                    <script-binding/>
                 </options>
             </control>
             <control>
@@ -268,7 +281,8 @@
                 <status>0x90</status>
                 <midino>0xc</midino>
                 <group>[Channel1]</group>
-                <key>loop_halve</key>
+                <key>beats_translate_curpos</key>
+                <description>Move Beatgrid to align with current playposition Deck A</description>
                 <options>
                     <normal/>
                 </options>
@@ -304,13 +318,33 @@
                 </options>
             </control>
             <control>
+                <status>0xb0</status>
+                <midino>0x3f</midino>
+                <group>[Flanger]</group>
+                <key>lfoDepth</key>
+                <description>Flanger Depth</description>
+                <options>
+                    <normal/>
+                </options>
+            </control>
+            <control>
+                <status>0x90</status>
+                <midino>0xf</midino>
+                <group>[Channel1]</group>
+                <key>HerculesAir.rewindDeckA</key>
+                <description>rewind Deck A with Shift Beat Jump</description>
+                <options>
+                    <script-binding/>
+                </options>
+            </control>
+            <control>
                 <status>0x90</status>
                 <midino>0x10</midino>
                 <group>[Channel1]</group>
-                <key>fwd</key>
-                <description>Deck A</description>
+                <key>HerculesAir.forwardDeckA</key>
+                <description>forward Deck A with Shift Beat Jump</description>
                 <options>
-                    <button/>
+                    <script-binding/>
                 </options>
             </control>
             <control>
@@ -375,20 +409,30 @@
             </control>
             <control>
                 <status>0x90</status>
+                <midino>0x17</midino>
+                <group>[Channel2]</group>
+                <key>HerculesAir.effectKnobLeftDeckB</key>
+                <description>Effect Knob Left / Reset (Both) Deck B</description>
+                <options>
+                    <script-binding/>
+                </options>
+            </control>
+            <control>
+                <status>0x90</status>
                 <midino>0x18</midino>
                 <group>[Channel2]</group>
-                <key>beats_translate_curpos</key>
-                <description>Move Beatgrid to align with current playposition Deck B</description>
+                <key>HerculesAir.effectKnobRightDeckB</key>
+                <description>Effect Knob Right / Reset (Both) Deck B</description>
                 <options>
-                    <normal/>
+                    <script-binding/>
                 </options>
             </control>
             <control>
                 <status>0x90</status>
                 <midino>0x19</midino>
                 <group>[Channel2]</group>
-                <key>quantize</key>
-                <description>Quantize Loops/Hot-Cues Deck B</description>
+                <key>keylock</key>
+                <description>Keylock Deck B</description>
                 <options>
                     <normal/>
                 </options>
@@ -397,8 +441,8 @@
                 <status>0x90</status>
                 <midino>0x1a</midino>
                 <group>[Channel2]</group>
-                <key>keylock</key>
-                <description>Keylock Deck B</description>
+                <key>beats_translate_curpos</key>
+                <description>Move Beatgrid to align with current playposition Deck B</description>
                 <options>
                     <normal/>
                 </options>
@@ -443,18 +487,20 @@
                 <status>0x90</status>
                 <midino>0x1f</midino>
                 <group>[Channel2]</group>
-                <key>beatloop_activate</key>
+                <key>HerculesAir.loopButton1DeckB</key>
+                <description>Beat Loop / Loop In (Shift) Deck B</description>
                 <options>
-                    <normal/>
+                    <script-binding/>
                 </options>
             </control>
             <control>
                 <status>0x90</status>
                 <midino>0x20</midino>
                 <group>[Channel2]</group>
-                <key>loop_double</key>
+                <key>HerculesAir.loopButton2DeckB</key>
+                <description>Loop Double / Loop Out (Shift) Deck B</description>
                 <options>
-                    <normal/>
+                    <script-binding/>
                 </options>
             </control>
             <control>
@@ -470,9 +516,10 @@
                 <status>0x90</status>
                 <midino>0x22</midino>
                 <group>[Channel2]</group>
-                <key>loop_halve</key>
+                <key>HerculesAir.loopButton4DeckB</key>
+                <description>Loop Halve / Loop Anchor (Shift) Deck B</description>
                 <options>
-                    <normal/>
+                    <script-binding/>
                 </options>
             </control>
             <control>
@@ -499,20 +546,20 @@
                 <status>0x90</status>
                 <midino>0x25</midino>
                 <group>[Channel2]</group>
-                <key>back</key>
-                <description>&lt;&lt; Deck B</description>
+                <key>HerculesAir.rewindDeckB</key>
+                <description>rewind Deck B with Shift Beat Jump</description>
                 <options>
-                    <button/>
+                    <script-binding/>
                 </options>
             </control>
             <control>
                 <status>0x90</status>
                 <midino>0x26</midino>
                 <group>[Channel2]</group>
-                <key>fwd</key>
-                <description>>> Deck B</description>
+                <key>HerculesAir.forwardDeckB</key>
+                <description>forward Deck B with Shift Beat Jump</description>
                 <options>
-                    <button/>
+                    <script-binding/>
                 </options>
             </control>
             <control>

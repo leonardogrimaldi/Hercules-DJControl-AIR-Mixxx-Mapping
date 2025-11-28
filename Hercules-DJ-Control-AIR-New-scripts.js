@@ -14,6 +14,7 @@ HerculesAir.shiftButtonPressed = false
 HerculesAir.enableSpinBack = false
 
 HerculesAir.wheel_multiplier = 0.4
+HerculesAir.filter_step = 0.10
 
 HerculesAir.init = function(id) {
     HerculesAir.id = id;
@@ -195,6 +196,300 @@ HerculesAir.shift = function(midino, control, value, status, group) {
     midi.sendShortMsg(status, control, value);
 }
 
+// Track button states for effect knob reset functionality
+HerculesAir.effectButton1Pressed = false;
+HerculesAir.effectButton2Pressed = false;
+
+
+// Effect knob control for Deck A button 1 (0x01) - turn left
+HerculesAir.effectKnobLeftDeckA = function(midino, control, value, status, group) {
+    if (value >= 0x01) { // Button pressed
+        HerculesAir.effectButton1Pressed = true;
+        
+        // Check if both buttons are pressed for reset
+        if (HerculesAir.effectButton1Pressed && HerculesAir.effectButton2Pressed) {
+            // Reset quick effect knob
+            script.triggerControl("[QuickEffectRack1_[Channel1]]", "super1_set_default");
+        } else {
+            // Turn effect knob left (decrease value)
+            var currentValue = engine.getValue("[QuickEffectRack1_[Channel1]]", "super1");
+            var newValue = Math.max(0, currentValue - HerculesAir.filter_step); // Decrease by 10%, min 0
+            engine.setValue("[QuickEffectRack1_[Channel1]]", "super1", newValue);
+        }
+    } else {
+        // Button released
+        HerculesAir.effectButton1Pressed = false;
+    }
+}
+
+// Effect knob control for Deck A button 2 (0x02) - turn right
+HerculesAir.effectKnobRightDeckA = function(midino, control, value, status, group) {
+    if (value >= 0x01) { // Button pressed
+        HerculesAir.effectButton2Pressed = true;
+        
+        // Check if both buttons are pressed for reset
+        if (HerculesAir.effectButton1Pressed && HerculesAir.effectButton2Pressed) {
+            // Reset effect knob to center (0.5)
+            script.triggerControl("[QuickEffectRack1_[Channel1]]", "super1_set_default");
+        } else {
+            // Turn effect knob right (increase value)
+            var currentValue = engine.getValue("[QuickEffectRack1_[Channel1]]", "super1");
+            var newValue = Math.min(1, currentValue + HerculesAir.filter_step); // Increase by 10%, max 1
+            engine.setValue("[QuickEffectRack1_[Channel1]]", "super1", newValue);
+        }
+    } else {
+        // Button released
+        HerculesAir.effectButton2Pressed = false;
+    }
+}
+
+// Rewind button for Deck A (0x0F) - with shift support for beat jumping
+HerculesAir.rewindDeckA = function(midino, control, value, status, group) {
+    if (value == 0x7f) { // Button pressed
+        if (HerculesAir.shiftButtonPressed) {
+            // Shift + Rewind: Jump backwards by X beats
+            engine.setValue(group, "beatjump_backward", 1);
+        } else {
+            // Normal Rewind: Fast rewind
+            engine.setValue(group, "back", 1);
+        }
+    } else {
+        // Button released
+        if (HerculesAir.shiftButtonPressed) {
+            // Reset beat jump on release
+            engine.setValue(group, "beatjump_backward", 0);
+        } else {
+            // Stop rewind
+            engine.setValue(group, "back", 0);
+        }
+    }
+}
+
+// Forward button for Deck A (0x10) - with shift support for beat jumping
+HerculesAir.forwardDeckA = function(midino, control, value, status, group) {
+    if (value == 0x7f) { // Button pressed
+        if (HerculesAir.shiftButtonPressed) {
+            // Shift + Forward: Jump forwards by X beats
+            engine.setValue(group, "beatjump_forward", 1);
+        } else {
+            // Normal Forward: Fast forward
+            engine.setValue(group, "fwd", 1);
+        }
+    } else {
+        // Button released
+        if (HerculesAir.shiftButtonPressed) {
+            // Reset beat jump on release
+            engine.setValue(group, "beatjump_forward", 0);
+        } else {
+            // Stop forward
+            engine.setValue(group, "fwd", 0);
+        }
+    }
+}
+
+// Loop button 1 for Deck A (0x09) - beatloop_activate with shift support for loop_in
+HerculesAir.loopButton1DeckA = function(midino, control, value, status, group) {
+    if (value >= 0x01) { // Button pressed (sensitive range)
+        if (HerculesAir.shiftButtonPressed) {
+            // Shift + Loop Button 1: Set loop in point
+            engine.setValue(group, "loop_in", 1);
+        } else {
+            // Normal Loop Button 1: Activate beat loop
+            engine.setValue(group, "beatloop_activate", 1);
+        }
+    } else {
+        // Button released - reset only the control that was activated
+        if (HerculesAir.shiftButtonPressed) {
+            engine.setValue(group, "loop_in", 0);
+        } else {
+            engine.setValue(group, "beatloop_activate", 0);
+        }
+    }
+}
+
+// Loop button 2 for Deck A (0x0A) - loop_double with shift support for loop_out
+HerculesAir.loopButton2DeckA = function(midino, control, value, status, group) {
+    if (value >= 0x01) { // Button pressed (sensitive range)
+        if (HerculesAir.shiftButtonPressed) {
+            // Shift + Loop Button 2: Set loop out point
+            engine.setValue(group, "loop_out", 1);
+        } else {
+            // Normal Loop Button 2: Double loop length
+            engine.setValue(group, "loop_double", 1);
+        }
+    } else {
+        // Button released - reset only the control that was activated
+        if (HerculesAir.shiftButtonPressed) {
+            engine.setValue(group, "loop_out", 0);
+        } else {
+            engine.setValue(group, "loop_double", 0);
+        }
+    }
+}
+
+// Loop button 4 for Deck A (0x0C) - loop_halve with shift support for loop_anchor
+HerculesAir.loopButton4DeckA = function(midino, control, value, status, group) {
+    if (value >= 0x01) { // Button pressed (sensitive range)
+        if (HerculesAir.shiftButtonPressed) {
+            // Shift + Loop Button 4: Toggle loop anchor
+            const loop_anchor_val = engine.getValue(group, "loop_anchor");
+            engine.setValue(group, "loop_anchor", loop_anchor_val ? 0 : 1);
+        } else {
+            // Normal Loop Button 4: Halve loop length
+            engine.setValue(group, "loop_halve", 1);
+        }
+    } else {
+        // Button released - only reset loop_halve (loop_anchor is a toggle)
+        if (!HerculesAir.shiftButtonPressed) {
+            engine.setValue(group, "loop_halve", 0);
+        }
+    }
+}
+
+// Rewind button for Deck B (0x25) - with shift support for beat jumping
+HerculesAir.rewindDeckB = function(midino, control, value, status, group) {
+    if (value == 0x7f) { // Button pressed
+        if (HerculesAir.shiftButtonPressed) {
+            // Shift + Rewind: Jump backwards by X beats
+            engine.setValue(group, "beatjump_backward", 1);
+        } else {
+            // Normal Rewind: Fast rewind
+            engine.setValue(group, "back", 1);
+        }
+    } else {
+        // Button released
+        if (HerculesAir.shiftButtonPressed) {
+            // Reset beat jump on release
+            engine.setValue(group, "beatjump_backward", 0);
+        } else {
+            // Stop rewind
+            engine.setValue(group, "back", 0);
+        }
+    }
+}
+
+// Forward button for Deck B (0x26) - with shift support for beat jumping
+HerculesAir.forwardDeckB = function(midino, control, value, status, group) {
+    if (value == 0x7f) { // Button pressed
+        if (HerculesAir.shiftButtonPressed) {
+            // Shift + Forward: Jump forwards by X beats
+            engine.setValue(group, "beatjump_forward", 1);
+        } else {
+            // Normal Forward: Fast forward
+            engine.setValue(group, "fwd", 1);
+        }
+    } else {
+        // Button released
+        if (HerculesAir.shiftButtonPressed) {
+            // Reset beat jump on release
+            engine.setValue(group, "beatjump_forward", 0);
+        } else {
+            // Stop forward
+            engine.setValue(group, "fwd", 0);
+        }
+    }
+}
+
+// Loop button 1 for Deck B (0x1F) - beatloop_activate with shift support for loop_in
+HerculesAir.loopButton1DeckB = function(midino, control, value, status, group) {
+    if (value >= 0x01) { // Button pressed (sensitive range)
+        if (HerculesAir.shiftButtonPressed) {
+            // Shift + Loop Button 1: Set loop in point
+            engine.setValue(group, "loop_in", 1);
+        } else {
+            // Normal Loop Button 1: Activate beat loop
+            engine.setValue(group, "beatloop_activate", 1);
+        }
+    } else {
+        // Button released - reset only the control that was activated
+        if (HerculesAir.shiftButtonPressed) {
+            engine.setValue(group, "loop_in", 0);
+        } else {
+            engine.setValue(group, "beatloop_activate", 0);
+        }
+    }
+}
+
+// Loop button 2 for Deck B (0x20) - loop_double with shift support for loop_out
+HerculesAir.loopButton2DeckB = function(midino, control, value, status, group) {
+    if (value >= 0x01) { // Button pressed (sensitive range)
+        if (HerculesAir.shiftButtonPressed) {
+            // Shift + Loop Button 2: Set loop out point
+            engine.setValue(group, "loop_out", 1);
+        } else {
+            // Normal Loop Button 2: Double loop length
+            engine.setValue(group, "loop_double", 1);
+        }
+    } else {
+        // Button released - reset only the control that was activated
+        if (HerculesAir.shiftButtonPressed) {
+            engine.setValue(group, "loop_out", 0);
+        } else {
+            engine.setValue(group, "loop_double", 0);
+        }
+    }
+}
+
+// Loop button 4 for Deck B (0x22) - loop_halve with shift support for loop_anchor
+HerculesAir.loopButton4DeckB = function(midino, control, value, status, group) {
+    if (value >= 0x01) { // Button pressed (sensitive range)
+        if (HerculesAir.shiftButtonPressed) {
+            // Shift + Loop Button 4: Toggle loop anchor
+            const loop_anchor_val = engine.getValue(group, "loop_anchor");
+            engine.setValue(group, "loop_anchor", loop_anchor_val ? 0 : 1);
+        } else {
+            // Normal Loop Button 4: Halve loop length
+            engine.setValue(group, "loop_halve", 1);
+        }
+    } else {
+        // Button released - only reset loop_halve (loop_anchor is a toggle)
+        if (!HerculesAir.shiftButtonPressed) {
+            engine.setValue(group, "loop_halve", 0);
+        }
+    }
+}
+
+// Effect knob control for Deck B button 1 (0x17) - turn left
+HerculesAir.effectKnobLeftDeckB = function(midino, control, value, status, group) {
+    if (value >= 0x01) { // Button pressed
+        HerculesAir.effectButton1Pressed = true;
+        
+        // Check if both buttons are pressed for reset
+        if (HerculesAir.effectButton1Pressed && HerculesAir.effectButton2Pressed) {
+            // Reset quick effect knob
+            script.triggerControl("[QuickEffectRack1_[Channel2]]", "super1_set_default");
+        } else {
+            // Turn effect knob left (decrease value)
+            var currentValue = engine.getValue("[QuickEffectRack1_[Channel2]]", "super1");
+            var newValue = Math.max(0, currentValue - HerculesAir.filter_step); // Decrease by 10%, min 0
+            engine.setValue("[QuickEffectRack1_[Channel2]]", "super1", newValue);
+        }
+    } else {
+        // Button released
+        HerculesAir.effectButton1Pressed = false;
+    }
+}
+
+// Effect knob control for Deck B button 2 (0x18) - turn right
+HerculesAir.effectKnobRightDeckB = function(midino, control, value, status, group) {
+    if (value >= 0x01) { // Button pressed
+        HerculesAir.effectButton2Pressed = true;
+        
+        // Check if both buttons are pressed for reset
+        if (HerculesAir.effectButton1Pressed && HerculesAir.effectButton2Pressed) {
+            // Reset effect knob to center (0.5)
+            script.triggerControl("[QuickEffectRack1_[Channel2]]", "super1_set_default");
+        } else {
+            // Turn effect knob right (increase value)
+            var currentValue = engine.getValue("[QuickEffectRack1_[Channel2]]", "super1");
+            var newValue = Math.min(1, currentValue + HerculesAir.filter_step); // Increase by 10%, max 1
+            engine.setValue("[QuickEffectRack1_[Channel2]]", "super1", newValue);
+        }
+    } else {
+        // Button released
+        HerculesAir.effectButton2Pressed = false;
+    }
+}
 
 HerculesAir.spinback= function(midino, control, value, status,group) {
     if (value==0x7f) {
