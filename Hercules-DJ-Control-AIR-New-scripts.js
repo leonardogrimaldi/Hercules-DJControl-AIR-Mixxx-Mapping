@@ -14,6 +14,7 @@ HerculesAir.shiftButtonPressed = false
 HerculesAir.enableSpinBack = false
 
 HerculesAir.wheel_multiplier = 0.4
+HerculesAir.filter_step = 0.10
 
 HerculesAir.init = function(id) {
     HerculesAir.id = id;
@@ -199,6 +200,7 @@ HerculesAir.shift = function(midino, control, value, status, group) {
 HerculesAir.effectButton1Pressed = false;
 HerculesAir.effectButton2Pressed = false;
 
+
 // Effect knob control for Deck A button 1 (0x01) - turn left
 HerculesAir.effectKnobLeftDeckA = function(midino, control, value, status, group) {
     if (value >= 0x01) { // Button pressed
@@ -206,12 +208,12 @@ HerculesAir.effectKnobLeftDeckA = function(midino, control, value, status, group
         
         // Check if both buttons are pressed for reset
         if (HerculesAir.effectButton1Pressed && HerculesAir.effectButton2Pressed) {
-            // Reset effect knob to center (0.5)
-            engine.setValue("[QuickEffectRack1_[Channel1]]", "super1", 0.5);
+            // Reset quick effect knob
+            script.triggerControl("[QuickEffectRack1_[Channel1]]", "super1_set_default");
         } else {
             // Turn effect knob left (decrease value)
             var currentValue = engine.getValue("[QuickEffectRack1_[Channel1]]", "super1");
-            var newValue = Math.max(0, currentValue - 0.05); // Decrease by 5%, min 0
+            var newValue = Math.max(0, currentValue - HerculesAir.filter_step); // Decrease by 10%, min 0
             engine.setValue("[QuickEffectRack1_[Channel1]]", "super1", newValue);
         }
     } else {
@@ -228,11 +230,11 @@ HerculesAir.effectKnobRightDeckA = function(midino, control, value, status, grou
         // Check if both buttons are pressed for reset
         if (HerculesAir.effectButton1Pressed && HerculesAir.effectButton2Pressed) {
             // Reset effect knob to center (0.5)
-            engine.setValue("[QuickEffectRack1_[Channel1]]", "super1", 0.5);
+            script.triggerControl("[QuickEffectRack1_[Channel1]]", "super1_set_default");
         } else {
             // Turn effect knob right (increase value)
             var currentValue = engine.getValue("[QuickEffectRack1_[Channel1]]", "super1");
-            var newValue = Math.min(1, currentValue + 0.05); // Increase by 5%, max 1
+            var newValue = Math.min(1, currentValue + HerculesAir.filter_step); // Increase by 10%, max 1
             engine.setValue("[QuickEffectRack1_[Channel1]]", "super1", newValue);
         }
     } else {
