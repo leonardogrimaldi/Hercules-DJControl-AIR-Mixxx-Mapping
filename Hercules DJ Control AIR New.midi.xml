@@ -280,10 +280,10 @@
                 <status>0x90</status>
                 <midino>0xc</midino>
                 <group>[Channel1]</group>
-                <key>beats_translate_curpos</key>
-                <description>Move Beatgrid to align with current playposition Deck A</description>
+                <key>HerculesAir.loopButton4DeckA</key>
+                <description>Loop Halve / Loop Anchor (Shift) Deck A</description>
                 <options>
-                    <normal/>
+                    <script-binding/>
                 </options>
             </control>
             <control>
